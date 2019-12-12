@@ -7,18 +7,27 @@ import (
 )
 
 type ResShifu struct {
-	Sort     int
-	Name     string
-	Typ      int
-	TypName  string
-	Phone    string
-	Img      string
-	Price    string
-	Location string // 地址
+	Sort     int    `json:"sort"`
+	Name     string `json:"name"`
+	Typ      int    `json:"typ"`
+	TypName  string `json:"typName"`
+	Phone    string `json:"phone"`
+	Img      string `json:"img"`
+	Price    string `json:"price"`
+	Location string `json:"location"` // 地址
+	Desc     string `json:"desc"`
 }
 
 func ShifuList(c *gin.Context) {
-	list, err := models.ShifuList()
+	req := new(models.ReqShifu)
+
+	err := c.ShouldBindQuery(&req)
+	if err != nil {
+		HandleErr(c, 1, err.Error())
+		return
+	}
+
+	list, err := models.ShifuList(req)
 	if err != nil {
 		HandleErr(c, 1, err.Error())
 		return
@@ -45,6 +54,7 @@ func ShifuList(c *gin.Context) {
 			Img:      item.Img,
 			Price:    item.Price,
 			Location: item.Location,
+			Desc:     item.Desc,
 		}
 		if v, ok := mTyp[int64(item.Typ)]; ok {
 			itemv.TypName = v
@@ -53,4 +63,21 @@ func ShifuList(c *gin.Context) {
 	}
 
 	HandleOk(c, resList)
+}
+
+func ShifuAdd(c *gin.Context) {
+	shifu := new(models.Shifu)
+
+	err := c.ShouldBindJSON(&shifu)
+	if err != nil {
+		HandleErr(c, 1, err.Error())
+		return
+	}
+	err = shifu.Add()
+	if err != nil {
+		HandleErr(c, 1, err.Error())
+		return
+	}
+
+	HandleOk(c, "success")
 }

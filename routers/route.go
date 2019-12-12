@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"jiazhen/common"
+	//"jiazhen/common"
 	"jiazhen/controllers"
 )
 
@@ -26,11 +26,19 @@ func Routers() *gin.Engine {
 
 	r.POST("/user/login", controllers.Login)
 
-	r.Use(common.JWT())
+	//r.Use(common.JWT())
+
+	r.POST("/category", controllers.CategoryAdd)
+
+	r.PUT("/category/:id", controllers.CategoryUpdate)
 
 	r.GET("/user/info", controllers.UserInfo)
 
 	r.GET("/typ", controllers.TypList)
+
+	r.POST("/typ", controllers.TypAdd)
+
+	r.POST("/shifu", controllers.ShifuAdd)
 
 	// api:=r.Group("/api")
 
