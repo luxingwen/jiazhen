@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="stylesheet" href="/public/static/css/font.css" />
     <link rel="stylesheet" href="/public/static/css/weadmin.css" />
+    <script src="/public/lib/layui/layui.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                 <i class="layui-icon layui-icon-delete"></i>批量删除
             </button>
-            <button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
+            <button class="layui-btn" onclick="WeAdminShow('添加大类','./category-add.html',600,400)">
                 <i class="layui-icon layui-icon-add-circle-fine"></i>添加
             </button>
         </div>
@@ -39,18 +40,23 @@
     	</script>
     </div>
     <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="/public/lib/layui/layui.js" charset="utf-8"></script>
+
     <script>
 
-		layui.use('table', function(){
-		  var table = layui.table;
+    	layui.extend({
+			admin: '/public/static/js/admin'
+		});
+
+		layui.use(['table', 'admin'], function(){
+		  var table = layui.table,
+		  	  admin = layui.admin;
 		  
 		  //第一个实例
 		  table.render({
 		    elem: '#demo'
 		    ,url: '/wx/category' //数据接口
 		    ,page: true //开启分页
-		    , parseData: function(res){ //res 即为原始返回的数据
+		    ,parseData: function(res){ //res 即为原始返回的数据
 			    return {
 			      "code": res.code, //解析接口状态
 			      "msg": res.msg, //解析提示文本

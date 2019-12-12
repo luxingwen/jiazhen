@@ -49,10 +49,9 @@
             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                 <i class="layui-icon layui-icon-delete"></i>批量删除
             </button>
-            <button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
+            <button class="layui-btn" onclick="WeAdminShow('添加师傅','./add.html',800,600)">
                 <i class="layui-icon layui-icon-add-circle-fine"></i>添加
             </button>
-            <span class="fr" style="line-height:40px">共有数据：88 条</span>
         </div>
         <table class="layui-hide" id="demo" lay-filter="test" height="100%"></table>
         <script type="text/html" id="barDemo">
@@ -66,14 +65,14 @@
   <!--   <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script> -->
     <script>
     //JavaScript代码区域
-    layui.use('element', function() {
-        var element = layui.element;
-
+    layui.extend({
+        admin: '/public/static/js/admin'
     });
 
 
-    layui.use('table', function() {
-        var table = layui.table;
+    layui.use(['table', 'admin'], function() {
+        var table = layui.table,
+            admin = layui.admin;
 
         //第一个实例
         table.render({
