@@ -16,6 +16,7 @@ import (
 func Routers() *gin.Engine {
 	r := gin.Default()
 	r.Static("/static", "./static")
+	r.Static("/public", "./public")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.Use(Cors())

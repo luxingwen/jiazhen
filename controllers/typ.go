@@ -7,12 +7,17 @@ import (
 )
 
 func TypList(c *gin.Context) {
-	list, err := models.TypList()
+	list, count, err := models.TypList()
 	if err != nil {
 		HandleErr(c, 0, err.Error())
 		return
 	}
-	HandleOk(c, list)
+
+	m := make(map[string]interface{}, 0)
+
+	m["count"] = count
+	m["list"] = list
+	HandleOk(c, m)
 }
 
 func TypAdd(c *gin.Context) {

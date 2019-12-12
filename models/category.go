@@ -13,9 +13,14 @@ type Category struct {
 	Img    string `json:"img"`
 }
 
-func CategoryList() (r []*Category, err error) {
+func CategoryList() (r []*Category, count int, err error) {
 	r = make([]*Category, 0)
 	err = common.GetDB().Find(&r).Error
+	if err != nil {
+		return
+	}
+
+	err = common.GetDB().Model(&Category{}).Count(&count).Error
 	return
 }
 

@@ -12,7 +12,7 @@ import (
 
 func CategoryList(c *gin.Context) {
 
-	list, err := models.CategoryList()
+	list, count, err := models.CategoryList()
 	if err != nil {
 		HandleErr(c, 1, err.Error())
 		return
@@ -22,7 +22,12 @@ func CategoryList(c *gin.Context) {
 		item.Img = config.ServerConf.FilePath + item.Img
 	}
 
-	HandleOk(c, list)
+	m := make(map[string]interface{}, 0)
+
+	m["count"] = count
+	m["list"] = list
+
+	HandleOk(c, m)
 }
 
 func CategoryAdd(c *gin.Context) {

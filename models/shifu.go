@@ -25,12 +25,12 @@ type ReqShifu struct {
 	Name string `form:"name"`
 }
 
-func ShifuList(q *ReqShifu) (r []*Shifu, err error) {
+func ShifuList(q *ReqShifu) (r []*Shifu, count int, err error) {
 	limit := 10
 	page := 0
 
 	if q.Page != 0 {
-		page = 0
+		page = q.Page - 1
 	}
 
 	if q.PageNum != 0 {
@@ -44,6 +44,11 @@ func ShifuList(q *ReqShifu) (r []*Shifu, err error) {
 	}
 	r = make([]*Shifu, 0)
 	err = db.Offset(offset).Limit(limit).Find(&r).Error
+	if err != nil {
+		return
+	}
+
+	err = db.Model(&Shifu{}).Count(&count).Error
 	return
 }
 

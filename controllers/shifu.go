@@ -27,13 +27,16 @@ func ShifuList(c *gin.Context) {
 		return
 	}
 
-	list, err := models.ShifuList(req)
+	list, count, err := models.ShifuList(req)
 	if err != nil {
 		HandleErr(c, 1, err.Error())
 		return
 	}
+	m := make(map[string]interface{}, 0)
 
-	typList, err := models.TypList()
+	m["count"] = count
+
+	typList, _, err := models.TypList()
 	if err != nil {
 		HandleErr(c, 1, err.Error())
 		return
@@ -62,7 +65,9 @@ func ShifuList(c *gin.Context) {
 		resList = append(resList, itemv)
 	}
 
-	HandleOk(c, resList)
+	m["list"] = resList
+
+	HandleOk(c, m)
 }
 
 func ShifuAdd(c *gin.Context) {

@@ -12,9 +12,18 @@ type Typ struct {
 	Name       string `json:"name"`
 }
 
-func TypList() (r []*Typ, err error) {
+func TypList() (r []*Typ, count int, err error) {
 	r = make([]*Typ, 0)
 	err = common.GetDB().Find(&r).Error
+	if err != nil {
+		return
+	}
+	err = common.GetDB().Model(&Typ{}).Count(&count).Error
+
+	if err != nil {
+		return
+	}
+
 	return
 }
 
