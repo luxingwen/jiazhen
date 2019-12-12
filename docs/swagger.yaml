@@ -1,0 +1,45 @@
+definitions:
+  models.User:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":0,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+      summary: 登录
+  /wx/brand:
+    get:
+      consumes:
+      - application/json
+      description: Exposes some information about itself
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 轮播图
+swagger: "2.0"

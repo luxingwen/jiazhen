@@ -5,14 +5,18 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 
 	//"jiazhen/common"
 	"jiazhen/controllers"
+	_ "jiazhen/docs"
 )
 
 func Routers() *gin.Engine {
 	r := gin.Default()
 	r.Static("/static", "./static")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.Use(Cors())
 

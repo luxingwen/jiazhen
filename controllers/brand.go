@@ -7,6 +7,12 @@ import (
 	"jiazhen/models"
 )
 
+// @Summary 轮播图
+// @Description Exposes some information about itself
+// @Accept json
+// @Produce json
+// @Success 200 {string} string "{"code":200,"data":"","msg":"ok"}"
+// @Router /wx/brand [get]
 func BrandList(c *gin.Context) {
 	list, err := models.BrandList()
 	if err != nil {

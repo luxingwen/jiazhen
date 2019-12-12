@@ -7,6 +7,12 @@ import (
 	"jiazhen/models"
 )
 
+// @Summary 登录
+// @Accept json
+// @Produce  json
+// @Param param body models.User true "{}"
+// @Success 200 {string} string "{"code":0,"data":{},"msg":"ok"}"
+// @Router /user/login [post]
 func Login(c *gin.Context) {
 
 	user := new(models.User)
