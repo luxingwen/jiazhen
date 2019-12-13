@@ -19,6 +19,25 @@ func Routers() *gin.Engine {
 	r.Static("/public", "./public")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	uploader, err := controllers.New(r, controllers.TConfig{
+		Path:      "upload",
+		UrlPrefix: "/api/v1",
+		File: controllers.FileConfig{
+			Path:      "files",
+			MaxSize:   10485760,
+			AllowType: []string{".txt", ".text", ".pdf"},
+		},
+		Image: controllers.ImageConfig{
+			Path:    "images",
+			MaxSize: 10485760,
+		},
+	})
+
+	if err != nil {
+		panic(err)
+	}
+	uploader.Resolve()
+
 	r.Use(Cors())
 
 	wx := r.Group("/wx")

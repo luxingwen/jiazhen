@@ -4,8 +4,9 @@ go 1.12
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
-	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a // indirect
+	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/aws/aws-sdk-go v1.26.0 // indirect
+	github.com/axetroy/go-fs v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/gin-gonic/gin v1.5.0
@@ -19,6 +20,7 @@ require (
 	github.com/jinzhu/gorm v1.9.11
 	github.com/microcosm-cc/bluemonday v1.0.2 // indirect
 	github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/qor/admin v0.0.0-20191211090149-7b936172cf06 // indirect
 	github.com/qor/amazon-pay-sdk-go v0.0.0-20190701100107-10aa1a55e598 // indirect
 	github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14 // indirect
