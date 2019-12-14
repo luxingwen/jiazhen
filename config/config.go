@@ -12,9 +12,10 @@ var (
 )
 
 type ServerConfig struct {
-	Port     string `toml:"port"`
-	RunMode  string `toml:"run-mode"`
-	FilePath string `toml:"file-path"`
+	Port      string `toml:"port"`
+	RunMode   string `toml:"run-mode"`
+	FilePath  string `toml:"file-path"`
+	ServerUrl string `toml:"server-url"`
 }
 
 type MySqlConfig struct {

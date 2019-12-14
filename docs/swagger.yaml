@@ -1,4 +1,13 @@
 definitions:
+  models.Brand:
+    properties:
+      img:
+        type: string
+      sort:
+        type: integer
+      url:
+        type: string
+    type: object
   models.User:
     properties:
       password:
@@ -10,6 +19,45 @@ info:
   contact: {}
   license: {}
 paths:
+  /brand:
+    post:
+      consumes:
+      - application/json
+      description: Exposes some information about itself
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 轮播图增加
+    put:
+      consumes:
+      - application/json
+      description: Exposes some information about itself
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 轮播图编辑
   /user/login:
     post:
       consumes:
@@ -29,6 +77,19 @@ paths:
           schema:
             type: string
       summary: 登录
+  /wx/arean:
+    get:
+      consumes:
+      - application/json
+      description: 地区列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 地区
   /wx/brand:
     get:
       consumes:

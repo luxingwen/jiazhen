@@ -15,6 +15,8 @@ import (
 	"path"
 	"strconv"
 	"strings"
+
+	"jiazhen/config"
 )
 
 const FIELD = "file"
@@ -109,6 +111,7 @@ func UploaderImage(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{
 		"hash":     md5string,
 		"filename": fileName,
+		"path":     config.ServerConf.ServerUrl + "/v1/download/image/origin/",
 		"origin":   file.Filename,
 		"size":     file.Size,
 		"code":     0,
@@ -191,9 +194,10 @@ func UploadFile(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{
 		"hash":     md5string,
 		"filename": fileName,
-		"origin":   file.Filename,
-		"size":     file.Size,
-		"code":     0,
+
+		"origin": file.Filename,
+		"size":   file.Size,
+		"code":   0,
 	})
 }
 

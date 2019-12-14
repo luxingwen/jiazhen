@@ -16,13 +16,15 @@ type Shifu struct {
 	Img      string `gorm:"column:img" json:"img"`
 	Price    string `gorm:"column:price" json:"price"`
 	Hot      int    `gorm:"column:hot" json:"hot"`
+	Arean    int    `gorm:"colunm:arean" json:"arean"`       // 地区
 	Location string `gorm:"column:location" json:"location"` // 地址
-	Desc     string `gorm:"colum:desc" json:"desc"`
+	Desc     string `gorm:"colum:desc;type:text" json:"desc"`
 }
 
 type ReqShifu struct {
 	Query
-	Name string `form:"name"`
+	Name     string `form:"name"`
+	Category int    `form:"category"`
 }
 
 func ShifuList(q *ReqShifu) (r []*Shifu, count int, err error) {
@@ -42,6 +44,11 @@ func ShifuList(q *ReqShifu) (r []*Shifu, count int, err error) {
 	if q.Name != "" {
 		db = db.Where("name = ?", q.Name)
 	}
+
+	if q.Category > 0 {
+		db = db.Where("category = ?", q.Category)
+	}
+
 	r = make([]*Shifu, 0)
 	err = db.Offset(offset).Limit(limit).Find(&r).Error
 	if err != nil {
@@ -55,4 +62,9 @@ func ShifuList(q *ReqShifu) (r []*Shifu, count int, err error) {
 func (this *Shifu) Add() (err error) {
 	err = common.GetDB().Create(&this).Error
 	return
+}
+
+func (this *Shifu) Get(id int64) (r *Shifu, err error) {
+	err = common.GetDB().Where("ID = ?", id).First(&this).Error
+	return this, err
 }

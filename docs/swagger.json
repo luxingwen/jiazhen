@@ -5,6 +5,66 @@
         "license": {}
     },
     "paths": {
+        "/brand": {
+            "put": {
+                "description": "Exposes some information about itself",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "轮播图编辑",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Brand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Exposes some information about itself",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "轮播图增加",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Brand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/login": {
             "post": {
                 "consumes": [
@@ -35,6 +95,26 @@
                 }
             }
         },
+        "/wx/arean": {
+            "get": {
+                "description": "地区列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "地区",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/wx/brand": {
             "get": {
                 "description": "Exposes some information about itself",
@@ -57,6 +137,20 @@
         }
     },
     "definitions": {
+        "models.Brand": {
+            "type": "object",
+            "properties": {
+                "img": {
+                    "type": "string"
+                },
+                "sort": {
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
         "models.User": {
             "type": "object",
             "properties": {

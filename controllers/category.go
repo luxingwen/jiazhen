@@ -7,6 +7,9 @@ import (
 	"jiazhen/config"
 	"jiazhen/models"
 
+	"path"
+	"strings"
+
 	"strconv"
 )
 
@@ -19,7 +22,7 @@ func CategoryList(c *gin.Context) {
 	}
 
 	for _, item := range list {
-		item.Img = config.ServerConf.FilePath + item.Img
+		item.Img = config.ServerConf.ServerUrl + "/v1/download/image/origin/" + item.Img
 	}
 
 	m := make(map[string]interface{}, 0)
@@ -60,7 +63,12 @@ func CategoryUpdate(c *gin.Context) {
 		HandleErr(c, 1, err.Error())
 		return
 	}
-	err = category.Add()
+
+	if strings.HasPrefix(category.Img, "http") || strings.HasPrefix(category.Img, "https") {
+		category.Img = path.Base(category.Img)
+	}
+
+	err = category.Update()
 	if err != nil {
 		HandleErr(c, 1, err.Error())
 		return

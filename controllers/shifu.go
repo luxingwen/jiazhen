@@ -3,10 +3,14 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 
+	"jiazhen/config"
 	"jiazhen/models"
+
+	"strconv"
 )
 
 type ResShifu struct {
+	ID       int    `json:"ID"`
 	Sort     int    `json:"sort"`
 	Name     string `json:"name"`
 	Typ      int    `json:"typ"`
@@ -50,11 +54,12 @@ func ShifuList(c *gin.Context) {
 	resList := make([]*ResShifu, 0)
 	for _, item := range list {
 		itemv := &ResShifu{
+			ID:       int(item.ID),
 			Sort:     item.Sort,
 			Name:     item.Name,
 			Typ:      item.Typ,
 			Phone:    item.Phone,
-			Img:      item.Img,
+			Img:      config.ServerConf.ServerUrl + "/v1/download/image/origin/" + item.Img,
 			Price:    item.Price,
 			Location: item.Location,
 			Desc:     item.Desc,
@@ -85,4 +90,19 @@ func ShifuAdd(c *gin.Context) {
 	}
 
 	HandleOk(c, "success")
+}
+
+func ShifuInfo(c *gin.Context) {
+	idstr := c.Param("id")
+
+	id, _ := strconv.ParseInt(idstr, 10, 64)
+
+	shifu := new(models.Shifu)
+	r, err := shifu.Get(id)
+	if err != nil {
+		HandleErr(c, 1, err.Error())
+		return
+	}
+	r.Img = config.ServerConf.ServerUrl + "/v1/download/image/origin/" + r.Img
+	HandleOk(c, r)
 }

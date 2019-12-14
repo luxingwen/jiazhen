@@ -21,7 +21,7 @@ func Routers() *gin.Engine {
 
 	uploader, err := controllers.New(r, controllers.TConfig{
 		Path:      "upload",
-		UrlPrefix: "/api/v1",
+		UrlPrefix: "/v1",
 		File: controllers.FileConfig{
 			Path:      "files",
 			MaxSize:   10485760,
@@ -44,8 +44,10 @@ func Routers() *gin.Engine {
 	{
 		wx.GET("/category", controllers.CategoryList)
 		wx.GET("/shifu", controllers.ShifuList)
+		wx.GET("/shifu/:id", controllers.ShifuInfo)
 		wx.GET("/brand", controllers.BrandList)
 		wx.POST("/feedback", controllers.FeedBackAdd)
+		wx.GET("/arean", controllers.AreanList)
 	}
 
 	r.POST("/user/login", controllers.Login)
@@ -53,8 +55,10 @@ func Routers() *gin.Engine {
 	//r.Use(common.JWT())
 
 	r.POST("/category", controllers.CategoryAdd)
-
 	r.PUT("/category/:id", controllers.CategoryUpdate)
+
+	r.POST("/brand", controllers.BrandAdd)
+	r.PUT("/brand/:id", controllers.BrandUpdate)
 
 	r.GET("/user/info", controllers.UserInfo)
 

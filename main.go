@@ -28,7 +28,7 @@ func init() {
 
 func main() {
 	db := common.Init()
-	db.AutoMigrate(&models.Brand{}, &models.Category{}, &models.Shifu{}, &models.Typ{}, &models.FeedBack{})
+	db.AutoMigrate(&models.Brand{}, &models.Category{}, &models.Shifu{}, &models.Typ{}, &models.FeedBack{}, &models.Arean{})
 	s := &http.Server{
 		Addr:           ":" + config.ServerConf.Port,
 		Handler:        routers.Routers(),

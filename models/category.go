@@ -28,3 +28,8 @@ func (this *Category) Add() (err error) {
 	err = common.GetDB().Create(&this).Error
 	return
 }
+
+func (this *Category) Update() (err error) {
+	err = common.GetDB().Save(&this).Error
+	return
+}
