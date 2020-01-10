@@ -8,6 +8,54 @@ definitions:
       url:
         type: string
     type: object
+  models.Category:
+    properties:
+      img:
+        type: string
+      name:
+        type: string
+      sortId:
+        type: integer
+    type: object
+  models.FeedBack:
+    properties:
+      contact:
+        description: 联系方式
+        type: string
+      content:
+        description: 反馈内容
+        type: string
+      name:
+        description: 昵称
+        type: string
+    type: object
+  models.Shifu:
+    properties:
+      arean:
+        description: 地区
+        type: integer
+      category:
+        type: integer
+      desc:
+        type: string
+      hot:
+        type: integer
+      img:
+        type: string
+      location:
+        description: 地址
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      price:
+        type: string
+      sort:
+        type: integer
+      typ:
+        type: integer
+    type: object
   models.User:
     properties:
       password:
@@ -23,7 +71,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Exposes some information about itself
+      description: 轮播图增加
       parameters:
       - description: '{}'
         in: body
@@ -39,10 +87,11 @@ paths:
           schema:
             type: string
       summary: 轮播图增加
+  /brand/{id}:
     put:
       consumes:
       - application/json
-      description: Exposes some information about itself
+      description: 轮播图编辑
       parameters:
       - description: '{}'
         in: body
@@ -50,6 +99,11 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/models.Brand'
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -58,6 +112,90 @@ paths:
           schema:
             type: string
       summary: 轮播图编辑
+  /category:
+    post:
+      consumes:
+      - application/json
+      description: 添加大类
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 添加大类
+  /category/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 更新大类
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 更新大类
+  /shifu:
+    post:
+      consumes:
+      - application/json
+      description: 添加师傅
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.Shifu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 添加师傅
+  /shifu/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 师傅详细信息
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 师傅详细信息
   /user/login:
     post:
       consumes:
@@ -103,4 +241,70 @@ paths:
           schema:
             type: string
       summary: 轮播图
+  /wx/category:
+    get:
+      consumes:
+      - application/json
+      description: 大类
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 大类列表
+  /wx/feedback:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: '{}'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/models.FeedBack'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":0,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+      summary: 意见反馈
+  /wx/shifu:
+    get:
+      consumes:
+      - application/json
+      description: 师傅列表
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      - description: name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: category
+        in: query
+        name: category
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":"","msg":"ok"}'
+          schema:
+            type: string
+      summary: 师傅列表
 swagger: "2.0"

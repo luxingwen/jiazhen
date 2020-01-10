@@ -8,9 +8,9 @@ import (
 
 type FeedBack struct {
 	gorm.Model
-	Name    string
-	Contact string
-	Content string
+	Name    string // 昵称
+	Contact string // 联系方式
+	Content string // 反馈内容
 }
 
 func (this *FeedBack) Add() (err error) {

@@ -7,6 +7,12 @@ import (
 	"jiazhen/models"
 )
 
+// @Summary 意见反馈
+// @Accept json
+// @Produce  json
+// @Param param body models.FeedBack true "{}"
+// @Success 200 {string} string "{"code":0,"data":{},"msg":"ok"}"
+// @Router /wx/feedback [post]
 func FeedBackAdd(c *gin.Context) {
 	fb := new(models.FeedBack)
 

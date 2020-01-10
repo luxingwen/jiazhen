@@ -22,6 +22,16 @@ type ResShifu struct {
 	Desc     string `json:"desc"`
 }
 
+// @Summary 师傅列表
+// @Description 师傅列表
+// @Accept json
+// @Produce json
+// @Param page query int true "page"
+// @Param limit query int true "limit"
+// @Param name query string true "name"
+// @Param category query int true "category"
+// @Success 200 {string} string "{"code":200,"data":"","msg":"ok"}"
+// @Router /wx/shifu [get]
 func ShifuList(c *gin.Context) {
 	req := new(models.ReqShifu)
 
@@ -75,6 +85,13 @@ func ShifuList(c *gin.Context) {
 	HandleOk(c, m)
 }
 
+// @Summary 添加师傅
+// @Description 添加师傅
+// @Accept json
+// @Produce json
+// @Param param body models.Shifu true "{}"
+// @Success 200 {string} string "{"code":200,"data":"","msg":"ok"}"
+// @Router /shifu [post]
 func ShifuAdd(c *gin.Context) {
 	shifu := new(models.Shifu)
 
@@ -92,6 +109,13 @@ func ShifuAdd(c *gin.Context) {
 	HandleOk(c, "success")
 }
 
+// @Summary 师傅详细信息
+// @Description 师傅详细信息
+// @Accept json
+// @Produce json
+// @Param id path int true "id"
+// @Success 200 {string} string "{"code":200,"data":"","msg":"ok"}"
+// @Router /shifu/{id} [get]
 func ShifuInfo(c *gin.Context) {
 	idstr := c.Param("id")
 

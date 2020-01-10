@@ -6,15 +6,15 @@
     },
     "paths": {
         "/brand": {
-            "put": {
-                "description": "Exposes some information about itself",
+            "post": {
+                "description": "轮播图增加",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "轮播图编辑",
+                "summary": "轮播图增加",
                 "parameters": [
                     {
                         "description": "{}",
@@ -34,16 +34,18 @@
                         }
                     }
                 }
-            },
-            "post": {
-                "description": "Exposes some information about itself",
+            }
+        },
+        "/brand/{id}": {
+            "put": {
+                "description": "轮播图编辑",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "轮播图增加",
+                "summary": "轮播图编辑",
                 "parameters": [
                     {
                         "description": "{}",
@@ -53,6 +55,142 @@
                         "schema": {
                             "$ref": "#/definitions/models.Brand"
                         }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/category": {
+            "post": {
+                "description": "添加大类",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "添加大类",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/{id}": {
+            "post": {
+                "description": "更新大类",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "更新大类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/shifu": {
+            "post": {
+                "description": "添加师傅",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "添加师傅",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Shifu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/shifu/{id}": {
+            "get": {
+                "description": "师傅详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "师傅详细信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -134,6 +272,106 @@
                     }
                 }
             }
+        },
+        "/wx/category": {
+            "get": {
+                "description": "大类",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "大类列表",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/wx/feedback": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "意见反馈",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.FeedBack"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":0,\"data\":{},\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/wx/shifu": {
+            "get": {
+                "description": "师傅列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "师傅列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "category",
+                        "name": "category",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"data\":\"\",\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -148,6 +386,77 @@
                 },
                 "url": {
                     "type": "string"
+                }
+            }
+        },
+        "models.Category": {
+            "type": "object",
+            "properties": {
+                "img": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sortId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.FeedBack": {
+            "type": "object",
+            "properties": {
+                "contact": {
+                    "description": "联系方式",
+                    "type": "string"
+                },
+                "content": {
+                    "description": "反馈内容",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "昵称",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Shifu": {
+            "type": "object",
+            "properties": {
+                "arean": {
+                    "description": "地区",
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "hot": {
+                    "type": "integer"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "location": {
+                    "description": "地址",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "sort": {
+                    "type": "integer"
+                },
+                "typ": {
+                    "type": "integer"
                 }
             }
         },

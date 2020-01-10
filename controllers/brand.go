@@ -32,7 +32,7 @@ func BrandList(c *gin.Context) {
 }
 
 // @Summary 轮播图增加
-// @Description Exposes some information about itself
+// @Description 轮播图增加
 // @Accept json
 // @Produce json
 // @Param param body models.Brand true "{}"
@@ -56,12 +56,13 @@ func BrandAdd(c *gin.Context) {
 }
 
 // @Summary 轮播图编辑
-// @Description Exposes some information about itself
+// @Description 轮播图编辑
 // @Accept json
 // @Produce json
 // @Param param body models.Brand true "{}"
+// @Param id path int true "id"
 // @Success 200 {string} string "{"code":200,"data":"","msg":"ok"}"
-// @Router /brand [put]
+// @Router /brand/{id} [put]
 func BrandUpdate(c *gin.Context) {
 
 	idstr := c.Param("id")

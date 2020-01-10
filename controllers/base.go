@@ -11,9 +11,3 @@ func HandleOk(c *gin.Context, data interface{}) {
 func HandleErr(c *gin.Context, code int, msg string) {
 	c.JSON(200, gin.H{"code": code, "msg": msg})
 }
-
-type Query struct {
-	Page    int    `json:"page"`
-	PageNum int    `json:"pageNum"`
-	Order   string `json:"order"`
-}
