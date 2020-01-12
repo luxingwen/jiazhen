@@ -10,6 +10,7 @@ type Shifu struct {
 	gorm.Model
 	Sort     int    `gorm:"column:sort" json:"sort"`
 	Name     string `gorm:"column:name" json:"name"`
+	Service  string `gorm:"column:service" json:"service"`
 	Category int    `gorm:"column:category" json:"category"`
 	Typ      int    `gorm:"column:typ" json:"typ"`
 	Phone    string `gorm:"column:phone" json:"phone"`

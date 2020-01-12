@@ -8,7 +8,7 @@ import (
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 
-	//"jiazhen/common"
+	"jiazhen/common"
 	"jiazhen/controllers"
 	_ "jiazhen/docs"
 )
@@ -36,6 +36,7 @@ func Routers() *gin.Engine {
 	if err != nil {
 		panic(err)
 	}
+
 	uploader.Resolve()
 
 	r.Use(Cors())
@@ -46,33 +47,34 @@ func Routers() *gin.Engine {
 		wx.GET("/shifu", controllers.ShifuList)
 		wx.GET("/shifu/:id", controllers.ShifuInfo)
 		wx.GET("/brand", controllers.BrandList)
-		wx.POST("/feedback", controllers.FeedBackAdd)
+
+		wx.POST("/login", controllers.WxLogin)
 		wx.GET("/arean", controllers.AreanList)
+
+		wx.POST("/feedback", controllers.FeedBackAdd)
 	}
 
-	r.POST("/user/login", controllers.Login)
+	v1 := r.Group("/v1")
 
-	//r.Use(common.JWT())
+	v1.POST("/user/login", controllers.Login)
 
-	r.POST("/category", controllers.CategoryAdd)
-	r.PUT("/category/:id", controllers.CategoryUpdate)
+	v1.Use(common.JWT())
 
-	r.POST("/brand", controllers.BrandAdd)
-	r.PUT("/brand/:id", controllers.BrandUpdate)
+	v1.GET("/category", controllers.CategoryList)
+	v1.POST("/category", controllers.CategoryAdd)
+	v1.PUT("/category/:id", controllers.CategoryUpdate)
 
-	r.GET("/user/info", controllers.UserInfo)
+	v1.GET("/brand", controllers.BrandList)
+	v1.POST("/brand", controllers.BrandAdd)
+	v1.PUT("/brand/:id", controllers.BrandUpdate)
 
-	r.GET("/typ", controllers.TypList)
+	v1.GET("/user/info", controllers.UserInfo)
 
-	r.POST("/typ", controllers.TypAdd)
+	v1.GET("/typ", controllers.TypList)
+	v1.POST("/typ", controllers.TypAdd)
 
-	r.POST("/shifu", controllers.ShifuAdd)
-
-	// api:=r.Group("/api")
-
-	// {
-	// 	api.POST("/login")
-	// }
+	v1.GET("/shifu", controllers.ShifuList)
+	v1.POST("/shifu", controllers.ShifuAdd)
 
 	return r
 }

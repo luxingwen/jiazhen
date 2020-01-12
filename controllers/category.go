@@ -57,7 +57,6 @@ func CategoryAdd(c *gin.Context) {
 		HandleErr(c, 1, err.Error())
 		return
 	}
-
 	HandleOk(c, "success")
 }
 

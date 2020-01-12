@@ -323,6 +323,36 @@
                 }
             }
         },
+        "/wx/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "{}",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":0,\"data\":{},\"msg\":\"ok\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/wx/shifu": {
             "get": {
                 "description": "师傅列表",
@@ -450,6 +480,9 @@
                     "type": "string"
                 },
                 "price": {
+                    "type": "string"
+                },
+                "service": {
                     "type": "string"
                 },
                 "sort": {
