@@ -7,7 +7,7 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/axetroy/go-fs v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/gin-gonic/gin v1.7.0
+	github.com/gin-gonic/gin v1.7.7
 	github.com/go-ini/ini v1.51.0
 	github.com/jinzhu/gorm v1.9.11
 	github.com/medivhzhan/weapp/v2 v2.0.1
